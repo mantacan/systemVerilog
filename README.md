@@ -12,9 +12,9 @@
 
 - Основы синтаксиса SystemVerilog.
 - Написание базовых программ в симуляторе.
-- Разработка проектов на симуляторе.
+- Разработка программ.
 
-**Разработка программ для симулятора**
+**Разработка прикладных программ**
 
 - Подробное изучение работы с симулятором.
 - Особенности программирования для симулятора и FPGA.
@@ -190,15 +190,138 @@ int my_output_value;
     end
 endmodule
 ```
-
-### _Задание №1_
+***
+### _Задание №1 "Симуляция началась..."_
 
 Зайдите на платформу [EDA Playground](https://edaplayground.com/home), скопируйте туда этот код и попробуйте скомпилировать.
 После чего переработайте программу так, чтобы она возводила число в квадрат и выводила в консоль:
 
 ```verilog
-number squared: squared_number
+$ number squared: squared_number
 ```
 ***
 ### Типы данных
+_Примечание: далеко не все типы данных systemVerilog поддерживаются в симуляторе Icarus Verilog_    
+ **Логические типы**
+```systemverilog
+bit var_bit;                     // Двухзначный, 0 или 1
+logic var_logic;                 // Четырехзначный: 0, 1, X (неопределенное), Z (высокоимпедансное)
+```
 
+**Целочисленные типы**
+```systemverilog
+int var_int;                     // 32-битное знаковое целое
+integer var_integer;             // Традиционный 32-битный знаковый целочисленный тип
+shortint var_shortint;           // 16-битное знаковое целое
+longint var_longint;             // 64-битное знаковое целое
+byte var_byte;                   // 8-битное знаковое целое
+```
+**Беззнаковые целочисленные типы**
+```systemverilog
+unsigned int var_uint;           // 32-битное беззнаковое целое
+unsigned shortint var_ushortint; // 16-битное беззнаковое целое
+unsigned longint var_ulongint;   // 64-битное беззнаковое целое
+```
+**Вещественные числа**
+```systemverilog
+real var_real;                   // Точное вещественное число (аналогично double в C++)
+shortreal var_shortreal;         // Неточное вещественное число (аналогично float в C++)
+```
+**Перечисления и структуры**
+```systemverilog
+enum {RED, GREEN, BLUE} color;   // Перечислимый тип
+struct {
+    int age;
+    bit valid;
+} person;                        // Структура
+```
+**Строки и массивы**
+```systemverilog
+string var_string;               // Динамический массив символов
+int array1[10];                  // Одномерный массив
+int array2[10][20];              // Двумерный массив
+```
+**Специализированные типы**
+```systemverilog
+chandle var_chandle;             // Тип указателя на канал
+event var_event;                 // Тип для событий в симуляции
+```
+***
+### Условные операторы
+
+**1. if-else**
+
+```systemverilog
+if (condition) begin
+   ...
+end else begin
+   ...
+end
+```
+
+**2. case**
+
+```systemverilog
+case (variable)
+    1: begin
+        ...
+    end
+    2: begin
+        ...
+    end
+    default: begin
+        ...
+    end
+endcase
+```
+
+***
+### _Задание №2_ "Модуль контроля температуры"
+Разработайте модуль, который принимает текущую температуру
+и в зависимости от температуры выводит текущие состояние.
+
+Диапазон температур:
+- temp < 5 - Заморозка
+- temp < 18 - Нагрев
+- temp > 22 - Охлаждение
+- temp > 40 - Перегрев
+***
+
+### Циклы
+
+**1. for**
+
+```systemverilog
+for (int i = 0; i < 10; i++) begin
+    // код, выполняемый для каждой итерации
+end
+```
+
+**2. while**
+
+```systemverilog
+while (condition) begin
+    // код, выполняемый, пока условие истинно
+end
+```
+
+**3. do-while**
+
+```systemverilog
+do begin
+    // код, выполняемый как минимум один раз
+end while (condition);
+```
+
+**4. foreach**
+
+```systemverilog
+int arr[5] = {1, 2, 3, 4, 5};
+foreach (arr[i]) begin
+    $display("Element %0d = %0d", i, arr[i]);
+end
+```
+***
+### _Задание №3_ "-"
+ 
+***
